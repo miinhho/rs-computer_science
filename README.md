@@ -1,4 +1,11 @@
 ## rs-computer_science
 
-Inspired by codes from [The Algorithms](https://github.com/TheAlgorithms/Rust)  
+### About
+- Data Structure  
+- Algorithm
+- Design Pattern
+- Etc...  
+
+
+Inspired by [The Algorithms](https://github.com/TheAlgorithms/Rust)  
 
