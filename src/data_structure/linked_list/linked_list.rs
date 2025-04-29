@@ -341,4 +341,92 @@ mod tests {
             panic!("Expected to find 78 at index 78");
         }
     }
+
+    #[test]
+    fn delete_tail_works() {
+        let mut list = LinkedList::<i32>::new();
+        let first_value = 1;
+        let second_value = 2;
+        list.insert_at_tail(first_value);
+        list.insert_at_tail(second_value);
+        match list.delete_tail() {
+            Some(val) => assert_eq!(val, 2),
+            None => panic!("Expected to remove {second_value} at tail"),
+        }
+
+        println!("Linked List is {list}");
+        match list.get(0) {
+            Some(val) => assert_eq!(*val, first_value),
+            None => panic!("Expected to find {first_value} at index 0"),
+        }
+    }
+
+    #[test]
+    fn delete_head_works() {
+        let mut list = LinkedList::<i32>::new();
+        let first_value = 1;
+        let second_value = 2;
+        list.insert_at_tail(first_value);
+        list.insert_at_tail(second_value);
+        match list.delete_head() {
+            Some(val) => assert_eq!(val, 1),
+            None => panic!("Expected to remove {first_value} at head"),
+        }
+
+        println!("Linked List is {list}");
+        match list.get(0) {
+            Some(val) => assert_eq!(*val, second_value),
+            None => panic!("Expected to find {second_value} at index 0"),
+        }
+    }
+
+    #[test]
+    fn delete_ith_can_delete_at_tail() {
+        let mut list = LinkedList::<i32>::new();
+        let first_value = 1;
+        let second_value = 2;
+        list.insert_at_tail(first_value);
+        list.insert_at_tail(second_value);
+        match list.delete_ith(1) {
+            Some(val) => assert_eq!(val, 2),
+            None => panic!("Expected to remove {second_value} at tail"),
+        }
+
+        assert_eq!(list.length, 1);
+    }
+
+    #[test]
+    fn delete_ith_can_delete_at_head() {
+        let mut list = LinkedList::<i32>::new();
+        let first_value = 1;
+        let second_value = 2;
+        list.insert_at_tail(first_value);
+        list.insert_at_tail(second_value);
+        match list.delete_ith(0) {
+            Some(val) => assert_eq!(val, 1),
+            None => panic!("Expected to remove {first_value} at tail"),
+        }
+
+        assert_eq!(list.length, 1);
+    }
+
+    #[test]
+    fn delete_ith_can_delete_in_middle() {
+        let mut list = LinkedList::<i32>::new();
+        let first_value = 1;
+        let second_value = 2;
+        let third_value = 3;
+        list.insert_at_tail(first_value);
+        list.insert_at_tail(second_value);
+        list.insert_at_tail(third_value);
+        match list.delete_ith(1) {
+            Some(val) => assert_eq!(val, 2),
+            None => panic!("Expected to remove {second_value} at tail"),
+        }
+
+        match list.get(1) {
+            Some(val) => assert_eq!(*val, third_value),
+            None => panic!("Expected to find {third_value} at index 1"),
+        }
+    }
 }
