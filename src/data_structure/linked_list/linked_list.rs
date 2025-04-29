@@ -65,7 +65,7 @@ impl<T> LinkedList<T> {
         }
 
         if self.length == index {
-            // self.insert_at_tail(obj);
+            self.insert_at_tail(obj);
             return;
         }
 
@@ -204,3 +204,20 @@ where
 }
 
 // TODO : Add test cases
+#[cfg(test)]
+mod tests {
+    use super::LinkedList;
+
+    #[test]
+    fn insert_at_tail_works() {
+        let mut list = LinkedList::<i32>::new();
+        let second_value = 2;
+        list.insert_at_tail(1);
+        list.insert_at_tail(second_value);
+        println!("Linked List is {list}");
+        match list.get(1) {
+            Some(val) => assert_eq!(*val, second_value),
+            None => panic!("Expected to find {second_value} at index 1"),
+        }
+    }
+}
