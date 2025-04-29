@@ -41,6 +41,19 @@ impl<T> LinkedList<T> {
         self.length += 1;
     }
 
+    pub fn insert_at_tail(&mut self, obj: T) {
+        let mut node = Box::new(Node::new(obj));
+        node.next = None;
+        node.prev = self.tail;
+        let node_ptr = NonNull::new(Box::into_raw(node));
+        match self.tail {
+            None => self.head = node_ptr,
+            Some(tail_ptr) => unsafe { (*tail_ptr.as_ptr()).next = node_ptr },
+        }
+        self.tail = node_ptr;
+        self.length += 1;
+    }
+
     pub fn insert_at_ith(&mut self, index: u32, obj: T) {
         if self.length < index {
             panic!("Index out of bounds");
