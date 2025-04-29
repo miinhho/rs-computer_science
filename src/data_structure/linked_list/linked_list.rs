@@ -349,6 +349,7 @@ mod tests {
         let second_value = 2;
         list.insert_at_tail(first_value);
         list.insert_at_tail(second_value);
+
         match list.delete_tail() {
             Some(val) => assert_eq!(val, 2),
             None => panic!("Expected to remove {second_value} at tail"),
@@ -368,12 +369,14 @@ mod tests {
         let second_value = 2;
         list.insert_at_tail(first_value);
         list.insert_at_tail(second_value);
+
         match list.delete_head() {
             Some(val) => assert_eq!(val, 1),
             None => panic!("Expected to remove {first_value} at head"),
         }
 
         println!("Linked List is {list}");
+
         match list.get(0) {
             Some(val) => assert_eq!(*val, second_value),
             None => panic!("Expected to find {second_value} at index 0"),
@@ -387,6 +390,7 @@ mod tests {
         let second_value = 2;
         list.insert_at_tail(first_value);
         list.insert_at_tail(second_value);
+
         match list.delete_ith(1) {
             Some(val) => assert_eq!(val, 2),
             None => panic!("Expected to remove {second_value} at tail"),
@@ -402,6 +406,7 @@ mod tests {
         let second_value = 2;
         list.insert_at_tail(first_value);
         list.insert_at_tail(second_value);
+
         match list.delete_ith(0) {
             Some(val) => assert_eq!(val, 1),
             None => panic!("Expected to remove {first_value} at tail"),
@@ -419,6 +424,7 @@ mod tests {
         list.insert_at_tail(first_value);
         list.insert_at_tail(second_value);
         list.insert_at_tail(third_value);
+
         match list.delete_ith(1) {
             Some(val) => assert_eq!(val, 2),
             None => panic!("Expected to remove {second_value} at tail"),
@@ -428,5 +434,51 @@ mod tests {
             Some(val) => assert_eq!(*val, third_value),
             None => panic!("Expected to find {third_value} at index 1"),
         }
+    }
+
+    #[test]
+    fn create_numeric_list() {
+        let mut list = LinkedList::<i32>::new();
+        list.insert_at_tail(1);
+        list.insert_at_tail(2);
+        list.insert_at_tail(3);
+        println!("Linked List is {list}");
+
+        assert_eq!(3, list.length);
+    }
+
+    #[test]
+    fn create_string_list() {
+        let mut list_str = LinkedList::<String>::new();
+        list_str.insert_at_tail("A".to_string());
+        list_str.insert_at_tail("B".to_string());
+        list_str.insert_at_tail("C".to_string());
+        println!("Linked List is {list_str}");
+
+        assert_eq!(3, list_str.length);
+    }
+
+    #[test]
+    fn get_by_index_in_numeric_list() {
+        let mut list = LinkedList::<i32>::new();
+        list.insert_at_tail(1);
+        list.insert_at_tail(2);
+        println!("Linked List is {list}");
+        let retrived_item = list.get(1);
+
+        assert!(retrived_item.is_some());
+        assert_eq!(2, *retrived_item.unwrap());
+    }
+
+    #[test]
+    fn get_by_index_in_string_list() {
+        let mut list_str = LinkedList::<String>::new();
+        list_str.insert_at_tail("A".to_string());
+        list_str.insert_at_tail("B".to_string());
+        println!("Linked List is {list_str}");
+        let retrived_item = list_str.get(1);
+
+        assert!(retrived_item.is_some());
+        assert_eq!("B", *retrived_item.unwrap());
     }
 }
